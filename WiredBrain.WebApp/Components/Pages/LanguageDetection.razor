@@ -1,0 +1,62 @@
+﻿@page "/languagedetection"
+@using WiredBrain_WebApp
+@rendermode InteractiveServer
+
+<PageTitle>Language Detection</PageTitle>
+
+<h1>Language Detection</h1>
+<h2>Scenario: Data classification (or alternatively text classification)</h2>
+
+<div>
+    Please enter your text here:
+</div>
+
+@if(allLables is not null)
+{
+    <ul>        @foreach(var lable in allLables)
+        {
+            <li>@lable.Key - @(Math.Round(lable.Value * 100, 2))%</li>
+        }
+    </ul>}
+
+<textarea class="form-control" style="height:150px;margin-top:5px" spellcheck="false"
+          @bind="inputText" @bind:event="oninput" @bind:after="TextChanged" />
+
+<div style="margin-top:20px;">
+    Detected language:
+    <span style="font-weight:bold">@detectedLanguage</span>
+</div>
+
+@code {
+
+    private IOrderedEnumerable<KeyValuePair<string, float>>? allLables;
+
+    private string? inputText;
+
+    private string? detectedLanguage = "None";
+
+    private void TextChanged()
+    {
+        if (inputText is null or "") 
+        {
+
+            detectedLanguage = "None";
+
+            allLables = null;
+
+            return;
+        }
+
+        var input= new LanguageDetectionModel.ModelInput()
+        {
+            Message = inputText
+        };
+
+        var output = LanguageDetectionModel.Predict(input);
+
+        detectedLanguage = output.PredictedLabel;
+
+        allLables = LanguageDetectionModel.PredictAllLabels(input);
+
+    }
+}
