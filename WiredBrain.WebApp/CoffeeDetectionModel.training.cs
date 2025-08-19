@@ -9,7 +9,7 @@ using Microsoft.ML;
 using Microsoft.ML.Data;
 using Microsoft.ML.Vision;
 
-namespace WiredBrain_WebApp
+namespace FHS_Machine_Learning
 {
     public partial class CoffeeDetectionModel
     {

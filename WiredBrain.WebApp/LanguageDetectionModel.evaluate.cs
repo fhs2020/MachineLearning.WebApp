@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace WiredBrain_WebApp
+namespace FHS_Machine_Learning_WebApp
 {
     public partial class LanguageDetectionModel
     {

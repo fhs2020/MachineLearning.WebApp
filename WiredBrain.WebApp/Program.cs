@@ -1,4 +1,4 @@
-using WiredBrain.WebApp.Components;
+using FHS_Machine_Learning.WebApp.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
